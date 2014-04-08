@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+    <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+    <link href="styles/main.css" rel="stylesheet" />
+
+    <script src="cordova.js"></script>
+    <script src="kendo/js/jquery.min.js"></script>
+    <script src="kendo/js/kendo.mobile.min.js"></script>
+    <script src="scripts/jquery.js"></script>
+    </head>
+    <body>
+        <div id="tabstrip-mortage"
+        data-role="view"
+        data-title="Chula Vista Realty">
+
+        <div class="view-content">
+            <h2>Mortgage Calculator</h2>
+        </div>
+            <div class="row-fluid">
+  				<div class="span6">
+					<div id="mortgage-calc">
+						<form>
+							<label>Purchase Price:</label>
+							<div class="input-prepend">
+								<span class="add-on">$</span>
+								<input class="span3" id="purchase" type="text" placeholder="Purchase Price">
+							</div>
+							<label>Down Payment:</label>
+							<div class="input-prepend">
+								<span class="add-on">$</span>
+								<input class="span3" id="down" type="text" placeholder="Down Payment">
+								<input class="span3" id="down_pct" type="text" placeholder="%">%
+								<span class="add-on" id=""></span>
+							</div>
+							<label>Loan Amount:</label>
+							<div class="input-prepend">
+								$<span class="add-on" id="amount"></span>
+								
+							</div>
+												
+							<label>Interest Rate:</label>
+							<div class="input-append">
+								<input class="span3" id="interest" type="text" placeholder="Interest Rate">
+								<span class="add-on">%</span>
+							</div>
+
+							<label>Term of loan:</label>
+							<div class="input-append">
+								<input class="span3" id="term-years" type="text" placeholder="Term">
+								<span class="add-on">Years</span>
+							</div>
+						</form>
+					</div>
+				</div>
+  				<div class="span6">
+  					<h3>Monthly Payment</h3>
+                	<div class="input-prepend">
+						<span class="add-on">$</span>
+						<input class="span4" id="total" readonly>
+					</div>
+  				  	<h3>Total Interest Paid</h3>
+                	<div class="input-prepend">
+						<span class="add-on">$</span>
+						<input class="span4" id="total_interest" readonly>
+					</div>
+  				</div>
+			</div>
+
+        <!--Layout-->
+    <div data-role="layout" data-id="tabstrip-layout">
+
+        <!--Header-->
+        <div data-role="header">
+            <div data-role="navbar">
+                <span data-role="view-title"></span>
+            </div>
+        </div>
+
+        <!--Footer-->
+        <div data-role="footer">
+            <div data-role="tabstrip">
+                <a href="#tabstrip-home" data-icon="home">Home</a>
+                <a href="#tabstrip-listings" data-icon="contacts">Listings</a>
+                <a href="#tabstrip-location" data-icon="search">Search</a>
+                <a href="#tabstrip-mortgage" data-icon="globe">Mortgage</a>
+            </div>
+        </div>
+    </div>
+     <script src="scripts/mtg_calc.js"></script>  
+    </body>
+</html>
