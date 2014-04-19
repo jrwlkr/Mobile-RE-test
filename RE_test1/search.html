@@ -18,15 +18,17 @@
                 <h2>Search Property Details</h2>
             </div>
     		<!--Search-->
-            <div id="tabstrip-search" data-role="view" data-title="Search">
-               <form id="z_search" method="post" action="zillow_DSR.php">
-                    <input type="hidden" name="id" value="manalo"/>
-                    Address: <br> <input type="text" name="address" value=""/>
-                    City &amp; State, or Zip: <br><input type="text" name="citystatezip" value=""/>
-                    <p><input id="z_Submit" type="Submit" value="Search" /></p>
-                </form>
+            <div data-role="page1" id="z_Form">
+                <div data-role="content">
+                    <form id="z_search" method="post" action="zillow_DSR.php">
+                        <input type="hidden" name="id" value="manalo"/>
+                        Address: <br> <input type="text" name="address" value=""/>
+                        City &amp; State, or Zip: <br><input type="text" name="citystatezip" value=""/>
+                        <p><input id="z_Submit" type="Submit" value="Search" /></p>
+                    </form>
+            	</div>
             </div>
-            <div data-role="page" id="z_DSR">
+            <div data-role="page2" id="z_DSR">
                 <div data-role="content">	
                     <ul data-role="listview" data-inset="true" id="z_List">
                     </ul>
@@ -65,7 +67,7 @@
             
             //console.log("Getting Property Data");
             //$.mobile.showPageLoadingMsg();
-            $.post("http://http://www.emerginggiant.com/RE_test/zillow_DSR.php", $( "#z_search" ).serialize(), function(res) {
+            $.post("http://www.emerginggiant.com/RE_test/zillow_DSR.php", $( "#z_search" ).serialize(), function(res) {
                 //$.mobile.hidePageLoadingMsg();
                 
                 if (res == "error"){
