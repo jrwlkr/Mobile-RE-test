@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Search</title>
+        <meta charset="utf-8" />
+    <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+    <link href="styles/main.css" rel="stylesheet" />
+
+    <script src="cordova.js"></script>
+    <script src="kendo/js/jquery.min.js"></script>
+    <script src="kendo/js/kendo.mobile.min.js"></script>
+    <script src="scripts/jquery.js"></script>
+    </head>
+    <body>
+    <div id="tabstrip-search" data-role="view" data-title="manalo realty">
+            <div class="view-content">
+                <h2>Search Property Details</h2>
+            </div>
+    		<!--Search-->
+            <div id="tabstrip-search" data-role="view" data-title="Search">
+               <form id="z_search" method="post" action="zillow_DSR.php">
+                    <input type="hidden" name="id" value="manalo"/>
+                    Address: <br> <input type="text" name="address" value=""/>
+                    City &amp; State, or Zip: <br><input type="text" name="citystatezip" value=""/>
+                    <p><input id="z_Submit" type="Submit" value="Search" /></p>
+                </form>
+            </div>
+            <div data-role="page" id="z_DSR">
+                <div data-role="content">	
+                    <ul data-role="listview" data-inset="true" id="z_List">
+                    </ul>
+                </div>
+            </div>
+		            
+       	<!--Layout-->
+       	<div data-role="layout" data-id="tabstrip-layout">
+            <!--Header-->
+            <div data-role="header">
+                <img src="styles/images/manalo_logo.jpg" alt="manalo realty inc." style="position: relative; top: 0%; left: 0%; margin-left: 0px; margin-top: 0px">            
+               <!-- <div data-role="navbar">
+                </div>  -->
+            </div>
+    
+            <!--Footer-->
+            <div data-role="footer">
+                
+                <div data-role="tabstrip">
+                    <a href="#tabstrip-home" data-icon="home">Home</a>
+                    <a href="#tabstrip-listings" data-icon="contacts">Listings</a>
+                    <a href="#tabstrip-search" data-icon="search">Search</a>
+                    <a href="mortgage.html" data-icon="globe">Mortgage</a>
+                </div>
+                <img src="styles/images/realtor_logo.jpg" alt="Realtor" style="position: absolute; bottom: 100%; left: 0%; margin-left: 0px; margin-top: 0px">
+            </div>
+        </div>
+    </div>                
+	<script>
+        // take over function on submit
+        $("#z_search").submit(function() {
+            alert( "Handler for .submit() called." );
+            
+            // Stop form from submitting normally
+            event.preventDefault();
+            
+            //console.log("Getting Property Data");
+            //$.mobile.showPageLoadingMsg();
+            $.post("http://http://www.emerginggiant.com/RE_test/zillow_DSR.php", $( "#z_search" ).serialize(), function(res) {
+                //$.mobile.hidePageLoadingMsg();
+                
+                if (res == "error"){
+                    "<p>Please try again.</p>"
+                }
+                
+                var s = "";
+                for(var i=0; i<res.length; i++) {
+                    s+= "<li>" + res[i].id + res[i].name + "</li>";
+                }
+                
+                $("#z_DSR").html(s);
+                $("#z_List").listview("refresh");
+            })
+            .fail(function() {
+                alert( "error" );
+            });
+            
+        });	
+	</script>
+    </body>
+</html>

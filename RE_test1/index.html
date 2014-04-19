@@ -15,20 +15,19 @@
     <script src="scripts/location.js"></script>
     <!--<script src="scripts/weather.js"></script>-->
     <script src="scripts/app.js"></script>
-
+	
 </head>
 <body>
     <!--Home-->
     <div id="tabstrip-home"
         data-role="view"
         data-title="Chula Vista Realty">
+        
 
         <div class="view-content">
             <h1>Let us help you!</h1>
             <!-- <a id="skin-change" data-role="button" data-click="app.changeSkin">Flat</a>  -->
-            <div style="width: 288px; height: 100px; position: relative; background-color: #fbfbfb; border: 1px solid #b8b8b8;">
-            <img src="http://codiqa.com/static/images/v2/image.png" alt="image" style="position: absolute; top: 50%; left: 50%; margin-left: -16px; margin-top: -18px">
-        </div>
+            
         <ul data-role="listview" data-divider-theme="b" data-inset="true">
             <li data-theme="c">
                 <a href="#tabstrip-listings" data-transition="slide">
@@ -36,7 +35,20 @@
                 </a>
             </li>
             <li data-theme="c">
-                <a href="#tabstrip-location" data-transition="slide">
+            <!--<a href="#searchPopup" data-rel="popup" class="ui-btn ui-btn-inline">Search</a>
+                <div data-role="popup" id="searchPopup" class="ui-content">
+                	<form method="post" action="">
+                    <div>        
+                    	<h3>Property Details</h3>
+                            <label for="addr" class="ui-hidden-accessible">Address:</label>
+                            <input type="text" name="address" id="addr" placeholder="Enter an Address">
+                            <label for="csz" class="ui-hidden-accessible">City, State, Zip:</label>
+                            <input type="text" name="csz" id="csz" placeholder="Enter City, State or Zip">
+                    </div>
+                    </form>
+                </div>                 
+                -->    
+             <a href="search.html" data-transition="slide">
                     Search
                 </a>
             </li>
@@ -51,10 +63,13 @@
                 </a>
             </li>
         </ul>
+               
             <div class="img"></div>
         </div>
     </div>
 
+    
+    
     <!--Location-->
     <div id="tabstrip-location"
         data-role="view"
@@ -84,20 +99,23 @@
 
         <!--Header-->
         <div data-role="header">
-            <div data-role="navbar">
-                <span data-role="view-title"></span>
-            </div>
+        	<img src="styles/images/manalo_logo.jpg" alt="manalo realty inc." style="position: relative; top: 0%; left: 0%; margin-left: 0px; margin-top: 0px">            
+           <!-- <div data-role="navbar">
+            </div>  -->
         </div>
 
         <!--Footer-->
         <div data-role="footer">
+            
             <div data-role="tabstrip">
                 <a href="#tabstrip-home" data-icon="home">Home</a>
                 <a href="#tabstrip-listings" data-icon="contacts">Listings</a>
-                <a href="#tabstrip-location" data-icon="search">Search</a>
+                <a href="#tabstrip-search" data-icon="search">Search</a>
                 <a href="mortgage.html" data-icon="globe">Mortgage</a>
             </div>
+            <img src="styles/images/realtor_logo.jpg" alt="Realtor" style="position: absolute; bottom: 100%; left: 0%; margin-left: 0px; margin-top: 0px">
         </div>
     </div>
+    
 </body>
 </html>
