@@ -71,7 +71,6 @@
 					//alert('z_id: ' + z_obj.zpid + ' address: ' + z_obj.street );
 					var state = z_obj.state;
 					var cap_state = state.toUpperCase();
-					var s = '';
 					
 					// append to the existing empty list
 					$("#z_DSR ul").append('<li>' + 'Address: ' + z_obj.street + ', ' + z_obj.city + ', ' + cap_state + '. ' + z_obj.zipcode + '</li>');
@@ -90,7 +89,8 @@
 			})
 			.fail(function() {
 				alert( 'Please try again2.' );
-			});
+			})
+        })
 	</script>
     </body>
 </html>
