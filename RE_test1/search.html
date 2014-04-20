@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>Search</title>
@@ -13,28 +12,27 @@
     <script src="scripts/jquery.js"></script>
     </head>
     <body>
+    <div id="tabstrip-home" data-role="view" data-title="manalo realty">
+    	<div class="view-content">
+            <h2>Search Property Details</h2>
+        </div>
+    	<!-Search-->
+        <div class="view-content">
+           <form id="z_search" method="post" action="zillow_DSR.php">
+                <input type="hidden" name="id" value="manalo"/>
+                Address: <br> <input type="text" name="address" value=""/>
+                City &amp; State, or Zip: <br><input type="text" name="citystatezip" value=""/>
+                <p><input id="z_Submit" type="Submit" value="Search" /></p>
+           </form>
+        </div>
+    </div>
+        
     <div id="tabstrip-search" data-role="view" data-title="manalo realty">
-            <div class="view-content">
-                <h2>Search Property Details</h2>
-            </div>
-    		<!--Search-->
-            <div data-role="page1" id="z_Form">
-                <div data-role="content">
-                    <form id="z_search" method="post" action="zillow_DSR.php">
-                        <input type="hidden" name="id" value="manalo"/>
-                        Address: <br> <input type="text" name="address" value=""/>
-                        City &amp; State, or Zip: <br><input type="text" name="citystatezip" value=""/>
-                        <p><input id="z_Submit" type="Submit" value="Search" /></p>
-                    </form>
-            	</div>
-            </div>
-            <div data-role="page2" id="z_DSR">
-                <div data-role="content">	
-                    <ul data-role="listview" data-inset="true" id="z_List">
-                    </ul>
-                </div>
-            </div>
-		            
+        <div class="view-content" id="z_DSR">
+                <ul data-role="listview" data-inset="true" id="z_List">
+                </ul>
+        </div>
+    </div>	            
        	<!--Layout-->
        	<div data-role="layout" data-id="tabstrip-layout">
             <!--Header-->
@@ -55,38 +53,44 @@
                 </div>
                 <img src="styles/images/realtor_logo.jpg" alt="Realtor" style="position: absolute; bottom: 100%; left: 0%; margin-left: 0px; margin-top: 0px">
             </div>
-        </div>
-    </div>                
+        </div>                
 	<script>
         // take over function on submit
-        $("#z_search").submit(function() {
-            alert( "Handler for .submit() called." );
-            
-            // Stop form from submitting normally
-            event.preventDefault();
-            
-            //console.log("Getting Property Data");
-            //$.mobile.showPageLoadingMsg();
-            $.post("http://www.emerginggiant.com/RE_test/zillow_DSR.php", $( "#z_search" ).serialize(), function(res) {
+        //alert( "Handler for .submit() called." );
+			// Stop form from submitting normally
+			event.preventDefault();
+			
+			//console.log("Getting Property Data");
+        	//$.mobile.showPageLoadingMsg();
+			$.post('zillow_DSR.php', $( '#z_search' ).serialize(), function(result) {
                 //$.mobile.hidePageLoadingMsg();
-                
-                if (res == "error"){
-                    "<p>Please try again.</p>"
-                }
-                
-                var s = "";
-                for(var i=0; i<res.length; i++) {
-                    s+= "<li>" + res[i].id + res[i].name + "</li>";
-                }
-                
-                $("#z_DSR").html(s);
-                $("#z_List").listview("refresh");
-            })
-            .fail(function() {
-                alert( "error" );
-            });
-            
-        });	
+				if(result){
+					var z_obj = $.parseJSON(result);
+					//alert('z_id: ' + z_obj.zpid + ' address: ' + z_obj.street );
+					var state = z_obj.state;
+					var cap_state = state.toUpperCase();
+					var s = '';
+					
+					// append to the existing empty list
+					$("#z_DSR ul").append('<li>' + 'Address: ' + z_obj.street + ', ' + z_obj.city + ', ' + cap_state + '. ' + z_obj.zipcode + '</li>');
+					$("#z_DSR ul").append('<li>Bedrooms: ' + z_obj.bedrooms + '</li>');
+					$("#z_DSR ul").append('<li>Bath(s): ' + z_obj.bathrooms + '</li>');
+					$("#z_DSR ul").append('<li>SqFt: ' + z_obj.finishedSqFt + '</li>');
+					$("#z_DSR ul").append('<li>Lot Size: ' + z_obj.lotSizeSqFt + '</li>');
+					$("#z_DSR ul").append('<li>Estimate: ' + '$' + z_obj.zestimate + '</li>');
+					
+					// refresh the list
+					$('#z_List:visible').listview('refresh');
+					
+				}else{
+					alert("Please try again.");
+				}
+			})
+				.fail(function() {
+					alert( 'Please try again.' );
+				});
+		 
+		});
 	</script>
     </body>
 </html>
