@@ -18,7 +18,7 @@
         </div>
     	<!-Search-->
         <div class="view-content">
-           <form id="z_search" method="post" action="zillow_DSR.php">
+           <form id="z_search" method="post" action="" data-ajax="false">
                 <input type="hidden" name="id" value="manalo"/>
                 Address: <br> <input type="text" name="address" value=""/>
                 City &amp; State, or Zip: <br><input type="text" name="citystatezip" value=""/>
@@ -56,13 +56,15 @@
         </div>                
 	<script>
         // take over function on submit
+        $("#z_search").submit(function() {
+        //$(document).on('click', '#submit', function() {
         //alert( "Handler for .submit() called." );
 			// Stop form from submitting normally
 			event.preventDefault();
 			
 			//console.log("Getting Property Data");
         	//$.mobile.showPageLoadingMsg();
-			$.post('zillow_DSR.php', $( '#z_search' ).serialize(), function(result) {
+        	$.post('http://www.emerginggiant.com/RE_test/zillow_DSR.php', $( '#z_search' ).serialize(), function(result) {
                 //$.mobile.hidePageLoadingMsg();
 				if(result){
 					var z_obj = $.parseJSON(result);
@@ -83,14 +85,12 @@
 					$('#z_List:visible').listview('refresh');
 					
 				}else{
-					alert("Please try again.");
+					alert("Please try again1.");
 				}
 			})
-				.fail(function() {
-					alert( 'Please try again.' );
-				});
-		 
-		});
+			.fail(function() {
+				alert( 'Please try again2.' );
+			});
 	</script>
     </body>
 </html>
